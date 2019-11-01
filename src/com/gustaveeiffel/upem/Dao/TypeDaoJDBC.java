@@ -11,7 +11,7 @@ public class TypeDaoJDBC implements TypeDao{
 
 	private Database db;
 	public boolean insererType(Type t) {
-		if(db.Insert("Type","idType","nomType")>0)return true;
+		if(db.Insert("Type","typeid","nomtype")>0)return true;
 		return false;
 	}
 

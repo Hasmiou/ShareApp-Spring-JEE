@@ -94,13 +94,13 @@ public class Database {
 	
 	public String[][] select(String tableName, String key, Object value){
 		
-		String query = "SELECT * FROM "+delimit(tableName)+" WHERE "+delimit(key)+" = '"+value+"'";
+		String query = "SELECT * FROM "+delimit(tableName)+" WHERE "+delimit(key)+"  ='"+value+"'";
 		return executeQuery(query);
 	}
 
 	public String[][] selectLike(String tableName, String key, String value){
 	
-		String query = "SELECT * FROM "+delimit(tableName)+" WHERE "+delimit(key)+" =  '"+value+"'";
+		String query = "SELECT * FROM "+delimit(tableName)+" WHERE "+delimit(key)+"  like '%"+value+"%'";
 		return executeQuery(query);
 	}
 	

@@ -13,25 +13,29 @@ public class ProduitDaoJDBC implements ProduitDao {
 	private Database db;
 	
 	public ProduitDaoJDBC(Database db) {
-		db = new Database();
+		this.db= db;
 	}
 	
 	@Override
 	public boolean insertProduit(Produit p) {
-		int operation=db.Insert("Produit",p.getProduitId(),p.getNomProduit(),p.getNote(),p.getCommentaire(),
-				p.getNombreEmprunt(),p.getDateAjout(),p.getEstDispo(),p.getTypeProduit().getTypeid()
-				,p.getUtilisateurId());
-		if(operation>0) return true;
-		else return false;
+		System.out.println(p);
+		int dispo=0;
+		if(p.getEstDispo()) {
+			dispo=1;
+		}
+		if(db.Insert("produit",p.getProduitId(),p.getNomProduit(),p.getNote(),p.getCommentaire(),
+				p.getNombreEmprunt(),p.getTypeProduit()
+				,p.getUtilisateurId(),dispo,p.getDateAjout())>0) return true;
+		return false;
 	}
 
 	
 	public List<Produit> chercherProduit(String motcle) {
-		String data[][] =db.selectLike("Produit","nom", motcle);
+		String data[][] =db.selectLike("produit","nom", motcle);
 		if (data == null) return null;
 		List<Produit> produits = new Vector<>();
-		
 		for (int i = 1; i < data.length; i++) {
+			//System.out.println(data[i]);
 			produits.add(new Produit(data[i]));
 		}
 		return produits;

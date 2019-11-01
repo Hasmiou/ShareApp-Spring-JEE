@@ -16,8 +16,9 @@ public class ProduitServiceDefault implements ProduitService {
 	public ProduitServiceDefault(Database db) {
 	dao = new ProduitDaoJDBC(db);
 	}
-	public void Ajouter(Produit p) {
-	 dao.insertProduit(p);
+	public boolean Ajouter(Produit p) {
+		if(dao.insertProduit(p)) return true;
+	   return false;
 	}
 
 	
@@ -41,11 +42,15 @@ public class ProduitServiceDefault implements ProduitService {
 	}
 	
 	public List<Produit> chercherProduit(String motcle) {
-		return null;
+		return dao.chercherProduit(motcle);
 	}
 	
 	@Override
 	public void restituer(Produit p, Utilisateur u) {
+		
+	}
+	@Override
+	public void update(Produit p) {
 		
 	}
 
